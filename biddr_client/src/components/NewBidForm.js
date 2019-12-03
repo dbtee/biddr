@@ -29,5 +29,4 @@ function NewBidForm(props) {
     </form>
   );
 }
-
 export default NewBidForm;
