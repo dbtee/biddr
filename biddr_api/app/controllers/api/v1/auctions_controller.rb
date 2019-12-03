@@ -17,9 +17,9 @@ class Api::V1::AuctionsController < Api::ApplicationController
   def show
     if @auction
       render(
-        json: @auction,
+        json: @auction
 
-        include: [ :author, {bid: [ :author ]} ]
+        # include: [ :seller, {bid: [ :bidder ]} ]
       )
       else
         render(json: {error: 'Auction Not found'})
@@ -27,10 +27,6 @@ class Api::V1::AuctionsController < Api::ApplicationController
 
   end
 
-  def destroy
-    @auction.destroy
-    render(json: { status: 200 }, status: 200)
-  end
 
   private
 

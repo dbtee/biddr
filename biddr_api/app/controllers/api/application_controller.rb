@@ -6,19 +6,20 @@ class Api::ApplicationController < ApplicationController
     private
 
     def current_user
-        if session[:user_id].present?
-          @current_user ||= User.find_by(id: session[:user_id])
-        end
+      if session[:user_id].present?
+        @current_user ||= User.find_by(id: session[:user_id])
       end
-      
-      helper_method(:current_user)
-
-      def user_signed_in?
-        current_user.present?
-      end
-      helper_method :user_signed_in?
-    
+    end
+    helper_method(:current_user)
+    # `helper_method` makes a controller method available
+    # to all views (or templates)
   
+    def user_signed_in?
+      current_user.present?
+    end
+    helper_method :user_signed_in?
+  
+
     def authenticate_user!
       unless current_user.present?
         render(json: { status: 401 }, status: 401 )

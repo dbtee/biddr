@@ -6,15 +6,18 @@ class AuctionSerializer < ActiveModel::Serializer
     :body,
     :created_at,
     :ends_at,
-    :reserve_price
+    :reserve_price,
+    :bids,
+    :user
     )
 
-    belongs_to(:user, key: :author)
-    has_many(:bids)
+    belongs_to :user
+    has_many :bids
 
     class BidSerializer < ActiveModel::Serializer
-      attributes :id, :price, :created_at
+      attributes :id, :user_id, :price, :created_at, :user
 
-      belongs_to :user, key: :author
+      belongs_to :user
+      belongs_to :auction
     end
 end

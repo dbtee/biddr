@@ -14,8 +14,7 @@ const Auction = {
     }).then(res => res.json());
   },
   create(params) {
-    // `params` is an object that represents a auction
-    // { body: 'qBody', title: 'qTitle' }
+
     return fetch(`${BASE_URL}/auctions`, {
       method: "POST",
       credentials: "include",
@@ -24,24 +23,22 @@ const Auction = {
       },
       body: JSON.stringify(params)
     }).then(res => res.json());
-  },
-  update(id, params) {
-    return fetch(`${BASE_URL}/auctions/${id}`, {
-      method: "PATCH",
+  }
+};
+
+const Bid = {
+  create(id, params) {
+
+    return fetch(`${BASE_URL}/auctions/${id}/bids`, {
+      method: "POST",
       credentials: "include",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify(params)
     }).then(res => res.json());
-  },
-  destroy(id) {
-    return fetch(`${BASE_URL}/auctions/${id}`, {
-      method: "DELETE",
-      credentials: "include"
-    }).then(res => res.json());
   }
-};
+}
 
 const Session = {
   create(params) {
@@ -83,4 +80,4 @@ const User = {
   }
 };
 
-export { Auction, Session, User };
+export { Auction, Session, User, Bid };
